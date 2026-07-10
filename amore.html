@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ti Amo!</title>
+    <style>
+        /* Reset e impostazioni base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Evita barre di scorrimento */
+            background-color: #000; /* Sfondo nero per far risaltare i colori */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Contenitore principale che pulsa */
+        .heart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 1.5s ease-in-out infinite;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Il testo ASCII */
+        pre {
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+            font-size: 4vw; /* Dimensione dinamica rispetto alla larghezza della pagina */
+            line-height: 1.1;
+            text-align: center;
+            transition: color 0.3s ease; /* Transizione fluida per il cambio colore */
+        }
+
+        /* Animazione del battito cardiaco */
+        @keyframes pulse {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(0.9); }
+        }
+
+        /* Classe che verrà applicata via JavaScript */
+        .color-red { color: #ff0000; }
+        .color-black { color: #000000; } /* Nota: se lo sfondo è nero, il nero non si vedrà. 
+                                        Ho messo uno sfondo scuro, quindi il nero 
+                                        funzionerà meglio se cambiamo lo sfondo o usiamo 
+                                        un grigio molto scuro. Modifichiamo leggermente il CSS sotto. */
+        .color-white { color: #ffffff; }
+
+    </style>
+</head>
+<body>
+
+<div class="heart-container">
+    <pre id="heart-text">
+         ******       ******
+       **      **   **      **
+     **         ** **         **
+    **           ***           **
+    **                         **
+     **       TI AMO!         **
+      **                     **
+        **                 **
+          **             **
+            **         **
+              **     **
+                ** **
+                  *
+    </pre>
+</div>
+
+<script>
+    const textElement = document.getElementById('heart-text');
+    const colors = ['#ff0000', '#555555', '#ffffff']; // Ho usato un grigio scuro (#555) al posto del nero puro per renderlo visibile su sfondo nero
+    let currentIndex = 0;
+
+    function changeColor() {
+        // Applichiamo il colore attuale
+        textElement.style.color = colors[currentIndex];
+
+        // Passiamo al colore successivo
+        currentIndex = (currentIndex + 1) % colors.length;
+    }
+
+    // Cambia colore ogni 800 millisecondi
+    setInterval(changeColor, 800);
+
+    // Cambia anche lo sfondo per far vedere il "nero" (grigio scuro)
+    // Se vuoi il nero vero, lo sfondo deve essere bianco. 
+    // Qui lo rendiamo un po' dinamico per gioco.
+    setInterval(() => {
+        // Per rendere il "nero" visibile, usiamo uno sfondo che cambia leggermente
+        // o semplicemente lasciamo il nero e usiamo un grigio per il testo.
+    }, 800);
+</script>
+
+</body>
+</html>
